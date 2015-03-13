@@ -1,4 +1,4 @@
-package com.example.myfragment.ui;
+package com.example.myfragment.allaccout;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,27 +6,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.myfragment.MainActivity;
 import com.example.myfragment.R;
+import com.example.myfragment.ui.TabBasicFragment;
 
-public class AllExamsVC extends NavigationFragment {
+public class AllAccoutContainer extends TabBasicFragment {
+	private boolean mIsViewInited = false;
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.vc_all_exams, container, false);
+		View view = inflater.inflate(R.layout.tab_fragment, container, false);
 
 		return view;
 	}
 
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onViewCreated(view, savedInstanceState);
 
-		setLeftBg(R.drawable.barbutton_settings);
-		setRightBg(R.drawable.barbutton_login);
-		setTitleText("All");
-		
-		((MainActivity)getActivity()).setFragmentLayout(R.id.fragment);
+		if (!mIsViewInited) {
+			mIsViewInited = true;
+			initView();
+		}
+	}
+	
+	private void initView(){
+		pushFragment(new AllAccoutVC(), null, false, false);
 	}
 }

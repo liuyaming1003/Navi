@@ -13,9 +13,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 public class BasicActivity extends FragmentActivity {
-	
+	protected Fragment customFragment;
 	protected final void pushFragment(int viewId, Fragment fragment, Fragment nextFragment, Bundle bundle, boolean isCanBack){
-		FragmentManager fm = fragment.getChildFragmentManager();
+		FragmentManager fm = customFragment.getChildFragmentManager();
 		FragmentTransaction ft =  fm.beginTransaction();
 		ft.setCustomAnimations(
 				R.anim.navigation_push_in,
@@ -34,7 +34,7 @@ public class BasicActivity extends FragmentActivity {
 	}
 	
 	protected final void presentFragment(int viewId, Fragment fragment, Fragment nextFragment, Bundle bundle, boolean isCanBack){
-		FragmentManager fm = fragment.getChildFragmentManager();
+		FragmentManager fm = customFragment.getChildFragmentManager();
 		FragmentTransaction ft =  fm.beginTransaction();
 		ft.setCustomAnimations(
 				R.anim.present_show_in,
@@ -53,12 +53,12 @@ public class BasicActivity extends FragmentActivity {
 	}
 	
 	protected final void popFragment(){
-		FragmentManager fm = getSupportFragmentManager();
+		FragmentManager fm = customFragment.getChildFragmentManager();
 		fm.popBackStack();
 	}
 	
 	protected final void popToRootFragment(){
-		FragmentManager fm = getSupportFragmentManager();
+		FragmentManager fm = customFragment.getChildFragmentManager();
 		int count = fm.getBackStackEntryCount();
 		while (true) {
 			if(count-- == 0){
@@ -69,7 +69,7 @@ public class BasicActivity extends FragmentActivity {
 	}
 	
 	protected final void popToAtFragment(int index){
-		FragmentManager fm = getSupportFragmentManager();
+		FragmentManager fm = customFragment.getChildFragmentManager();
 		fm.popBackStack();
 		int count = fm.getBackStackEntryCount();
 		if(index >= 0 && index < count){

@@ -1,5 +1,7 @@
 package com.example.myfragment.ui;
 
+import java.lang.reflect.Field;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -18,7 +20,6 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 
 public class BasicFragment extends Fragment {
-	protected onSwitchFragmentListener switchFragmentListener = null;
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -33,11 +34,11 @@ public class BasicFragment extends Fragment {
 	public void onAttach(Activity activity) {
 		// TODO Auto-generated method stub
 
-		try{
-			switchFragmentListener = (onSwitchFragmentListener) activity;
-		}catch(ClassCastException e){
-			throw new ClassCastException(activity.toString() + "must implement onSwitchFragmentListener");
-		}
+//		try{
+//			switchFragmentListener = (onSwitchFragmentListener) activity;
+//		}catch(ClassCastException e){
+//			throw new ClassCastException(activity.toString() + "must implement onSwitchFragmentListener");
+//		}
 
 
 
@@ -150,7 +151,16 @@ public class BasicFragment extends Fragment {
 		// TODO Auto-generated method stub
 
 		System.out.println("********** "+ this + "onDetach" + " **********");
+		try {
+			Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
+			childFragmentManager.setAccessible(true);
+			childFragmentManager.set(this, null);
 
+		} catch (NoSuchFieldException e) {
+			throw new RuntimeException(e);
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
+		}
 		super.onDetach();
 	}
 
@@ -272,11 +282,39 @@ public class BasicFragment extends Fragment {
 		super.onViewStateRestored(savedInstanceState);
 	}
 
-	public interface onSwitchFragmentListener{
-		public void push(Fragment fragment, Fragment nextFragment, Bundle bundle, boolean isCanBack);
-		public void present(Fragment fragment, Fragment nextFragment, Bundle bundle, boolean isCanBack);
-		public void pop();
-		public void popToRoot();
-		public void popToFragment(int atIndex);
+	protected final void push(Fragment nextFragment, Bundle bundle, boolean isCanBack){
+		((TabBasicFragment)getParentFragment()).pushFragment(nextFragment, bundle, isCanBack);
 	}
+
+	protected final void push(Fragment nextFragment, Bundle bundle, boolean isCanBack, boolean anim){
+		((TabBasicFragment)getParentFragment()).pushFragment(nextFragment, bundle, isCanBack, anim);
+	}
+
+	protected final void present(Fragment nextFragment, Bundle bundle, boolean isCanBack){
+		((TabBasicFragment)getParentFragment()).presentFragment(nextFragment, bundle, isCanBack);
+	}
+
+	protected final void present(Fragment nextFragment, Bundle bundle, boolean isCanBack, boolean anim){
+		((TabBasicFragment)getParentFragment()).presentFragment(nextFragment, bundle, isCanBack);
+	}
+
+	protected final void pop(){
+		((TabBasicFragment)getParentFragment()).popFragment();
+	}
+	
+	protected final void popToRoot(){
+		((TabBasicFragment)getParentFragment()).popToRootFragment();
+	}
+	
+	protected final void popToFragment(int atIndex){
+		((TabBasicFragment)getParentFragment()).popToAtFragment(atIndex);
+	}
+
+	//	public interface onSwitchFragmentListener{
+	//		public void push(Fragment fragment, Fragment nextFragment, Bundle bundle, boolean isCanBack);
+	//		public void present(Fragment fragment, Fragment nextFragment, Bundle bundle, boolean isCanBack);
+	//		public void pop();
+	//		public void popToRoot();
+	//		public void popToFragment(int atIndex);
+	//	}
 }

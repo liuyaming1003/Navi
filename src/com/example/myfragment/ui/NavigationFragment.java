@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,18 +15,17 @@ public class NavigationFragment extends BasicFragment {
 	private Button rightBtn;
 	private TextView titleTv;
 	protected boolean isCanBack = true;
-	private OnNavigationFragmentListener listener = null;
-	
+
 	@Override
 	public void onAttach(Activity activity) {
-		try{
-		listener = (OnNavigationFragmentListener) activity;
-		}catch(ClassCastException e){
-			throw new ClassCastException(activity.toString() + "must implement NavigationFragmentListener");
-		}
+		//		try{
+		//		listener = (OnNavigationFragmentListener) activity;
+		//		}catch(ClassCastException e){
+		//			throw new ClassCastException(activity.toString() + "must implement NavigationFragmentListener");
+		//		}
 		super.onAttach(activity);
 	}
-	
+
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
@@ -36,9 +34,7 @@ public class NavigationFragment extends BasicFragment {
 			leftBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if(listener != null){
-						listener.leftBar(v, NavigationFragment.this);
-					}
+					leftBar(v);
 				}
 			});
 		}
@@ -48,9 +44,7 @@ public class NavigationFragment extends BasicFragment {
 			rightBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if(listener != null){
-						listener.rightBar(v, NavigationFragment.this);
-					}
+					rightBar(v);
 				}
 			});
 		}
@@ -59,11 +53,11 @@ public class NavigationFragment extends BasicFragment {
 		if(titleTv != null){
 
 		}
-		
-		
+
+
 		super.onViewCreated(view, savedInstanceState);
 	}
-	
+
 	/**
 	 * 设置左边按钮文字
 	 * @param text
@@ -116,7 +110,7 @@ public class NavigationFragment extends BasicFragment {
 			}
 		}
 	}
-	
+
 	/**
 	 * 设置中间按钮文字
 	 * @param text
@@ -126,9 +120,11 @@ public class NavigationFragment extends BasicFragment {
 			titleTv.setText(text);
 		}
 	}
-	
-	public interface OnNavigationFragmentListener{
-		public void leftBar(View view, Fragment fragment);
-		public void rightBar(View view, Fragment fragment);
+
+	public void leftBar(View view){
+		pop();
+	}
+	public void rightBar(View view){
+		popToRoot();
 	}
 }

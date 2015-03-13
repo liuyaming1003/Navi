@@ -28,7 +28,7 @@ public class AllExamsVC extends NavigationFragment {
         rootView.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				push(new AllUploadVC(), null, true);
+				push(new AllExamsVC(), null, true);
 			}
 		});
         

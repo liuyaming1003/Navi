@@ -10,16 +10,20 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.TabHost.OnTabChangeListener;
 
 
 public class MainActivity extends BasicActivity implements OnTabChangeListener{
+	private long mExitTime;
+
 	private FragmentTabHost mTabHost = null;;
 	private View indicator = null;
 	private String Tab_AllExams = "AllExams";
 	private String Tab_AllUpload = "AllUpload";
 	private String Tab_AllShare = "AllShare";
 	private String Tab_AllAccout = "AllAccout";
+	private AllExamsContainer examsContainer;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,10 +34,11 @@ public class MainActivity extends BasicActivity implements OnTabChangeListener{
 		mTabHost.setup(this, getSupportFragmentManager(), R.id.frameLayout);
 		//TabHost
 		// 添加tab名称和图标
+		examsContainer = new AllExamsContainer();
 		indicator = getIndicatorView("试卷", R.layout.tab_item_all_exams);
 		mTabHost.addTab(
 				mTabHost.newTabSpec(Tab_AllExams).setIndicator(indicator),
-				AllExamsContainer.class, null);
+				examsContainer.getClass(), null);
 
 		indicator = getIndicatorView("全部上传", R.layout.tab_item_all_upload);
 		mTabHost.addTab(
@@ -66,6 +71,7 @@ public class MainActivity extends BasicActivity implements OnTabChangeListener{
 	public void onBackPressed() {
 		boolean isPopFragment = false;
 		String currentTabTag = mTabHost.getCurrentTabTag();
+		System.out.println("Tag = " + currentTabTag);
 		if (currentTabTag.equals(Tab_AllExams) ||
 				currentTabTag.equals(Tab_AllUpload) ||
 				currentTabTag.equals(Tab_AllShare) ||
@@ -74,7 +80,12 @@ public class MainActivity extends BasicActivity implements OnTabChangeListener{
 		}
 
 		if (!isPopFragment) {
-			finish();
+			if ((System.currentTimeMillis() - mExitTime) > 2000) {// 如果两次按键时间间隔大于2000毫秒，则不退出
+				Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+				mExitTime = System.currentTimeMillis();// 更新mExitTime
+			} else {
+				System.exit(0);// 否则退出程序
+			}
 		}
 	}
 }

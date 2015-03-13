@@ -1,7 +1,5 @@
 package com.example.myfragment.ui;
 
-import java.lang.reflect.Field;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -150,17 +148,6 @@ public class BasicFragment extends Fragment {
 	public void onDetach() {
 		// TODO Auto-generated method stub
 
-		System.out.println("********** "+ this + "onDetach" + " **********");
-		try {
-			Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
-			childFragmentManager.setAccessible(true);
-			childFragmentManager.set(this, null);
-
-		} catch (NoSuchFieldException e) {
-			throw new RuntimeException(e);
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e);
-		}
 		super.onDetach();
 	}
 
@@ -295,7 +282,7 @@ public class BasicFragment extends Fragment {
 	}
 
 	protected final void present(Fragment nextFragment, Bundle bundle, boolean isCanBack, boolean anim){
-		((TabBasicFragment)getParentFragment()).presentFragment(nextFragment, bundle, isCanBack);
+		((TabBasicFragment)getParentFragment()).presentFragment(nextFragment, bundle, isCanBack, anim);
 	}
 
 	protected final void pop(){

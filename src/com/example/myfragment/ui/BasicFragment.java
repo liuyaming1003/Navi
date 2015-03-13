@@ -269,12 +269,12 @@ public class BasicFragment extends Fragment {
 		super.onViewStateRestored(savedInstanceState);
 	}
 
-	protected final void push(Fragment nextFragment, Bundle bundle, boolean isCanBack){
-		((TabBasicFragment)getParentFragment()).pushFragment(nextFragment, bundle, isCanBack);
+	protected final void push(Fragment fragment, Fragment nextFragment, Bundle bundle, boolean isCanBack){
+		((TabBasicFragment)getParentFragment()).pushFragment(fragment, nextFragment, bundle, isCanBack);
 	}
 
-	protected final void push(Fragment nextFragment, Bundle bundle, boolean isCanBack, boolean anim){
-		((TabBasicFragment)getParentFragment()).pushFragment(nextFragment, bundle, isCanBack, anim);
+	protected final void push(Fragment fragment, Fragment nextFragment, Bundle bundle, boolean isCanBack, boolean anim){
+		((TabBasicFragment)getParentFragment()).pushFragment(fragment, nextFragment, bundle, isCanBack, anim);
 	}
 
 	protected final void present(Fragment nextFragment, Bundle bundle, boolean isCanBack){

@@ -10,26 +10,18 @@ import android.view.ViewGroup;
 import com.example.myfragment.R;
 import com.example.myfragment.ui.NavigationFragment;
 
-public class AllExamsVC extends NavigationFragment {
+public class ExamsDetail extends NavigationFragment {
 	private View rootView;
 	@SuppressLint("InflateParams") @Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		//View view = inflater.inflate(R.layout.vc_all_exams, container, false);
 		if(rootView==null){  
-            rootView=inflater.inflate(R.layout.vc_all_exams, null);  
+            rootView=inflater.inflate(R.layout.vc_all_exams_detail, null);  
         }  
         ViewGroup parent = (ViewGroup) rootView.getParent();  
         if (parent != null) {  
             parent.removeView(rootView);  
         }   
-        
-        rootView.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				push(AllExamsVC.this, new ExamsDetail(), null, true);
-			}
-		});
         
         return rootView;  
 	}
@@ -41,15 +33,7 @@ public class AllExamsVC extends NavigationFragment {
 		if(savedInstanceState == null){
 			setLeftBg(R.drawable.navigation_back_bg);
 			setRightBg(R.drawable.navigation_home_bg);
-			setTitleText("全部");
+			setTitleText("详情");
 		}
-	}
-	
-	@Override
-	public void onHiddenChanged(boolean hidden) {
-		
-		System.out.println("hidden = " + hidden);
-		
-		super.onHiddenChanged(hidden);
 	}
 }

@@ -30,6 +30,6 @@ public class AllAccoutContainer extends TabBasicFragment {
 	}
 	
 	private void initView(){
-		pushFragment(new AllAccoutVC(), null, false, false);
+		pushFragment(this, new AllAccoutVC(), null, false, false);
 	}
 }

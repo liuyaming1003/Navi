@@ -30,6 +30,6 @@ public class AllShareContainer extends TabBasicFragment {
 	}
 	
 	private void initView(){
-		pushFragment(new AllShareVC(), null, false, false);
+		pushFragment(this, new AllShareVC(), null, false, false);
 	}
 }

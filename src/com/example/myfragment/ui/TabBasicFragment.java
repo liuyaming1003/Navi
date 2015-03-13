@@ -22,7 +22,6 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.animation.Animation;
 
 public class TabBasicFragment extends Fragment {
-
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -37,6 +36,8 @@ public class TabBasicFragment extends Fragment {
 
 		System.out.println("********** "+ this + "onAttach" + " **********");
 
+		onTabbarListener = (OnTabbarListener) activity;
+		
 		super.onAttach(activity);
 	}
 
@@ -144,7 +145,7 @@ public class TabBasicFragment extends Fragment {
 		// TODO Auto-generated method stub
 
 		System.out.println("********** "+ this + "onDetach" + " **********");
-		
+
 		super.onDetach();
 	}
 
@@ -266,7 +267,7 @@ public class TabBasicFragment extends Fragment {
 		super.onViewStateRestored(savedInstanceState);
 	}
 
-	public void pushFragment(Fragment nextFragment, Bundle bundle, boolean isCanBack, boolean anim){
+	public void pushFragment(Fragment fragment, Fragment nextFragment, Bundle bundle, boolean isCanBack, boolean anim){
 		FragmentManager fm = getChildFragmentManager();
 		FragmentTransaction ft =  fm.beginTransaction();
 		if(anim == true){
@@ -275,6 +276,10 @@ public class TabBasicFragment extends Fragment {
 					R.anim.navigation_push_out,
 					R.anim.navigation_pop_in,
 					R.anim.navigation_pop_out);
+		}
+		if(fragment != this){
+			System.out.println("fragment is not this");
+			ft.hide(fragment);
 		}
 		if(bundle != null){
 			nextFragment.setArguments(bundle);
@@ -286,8 +291,8 @@ public class TabBasicFragment extends Fragment {
 		ft.commit();
 	}
 
-	public final void pushFragment(Fragment nextFragment, Bundle bundle, boolean isCanBack){
-		pushFragment(nextFragment, bundle, isCanBack, true);
+	public final void pushFragment(Fragment fragment, Fragment nextFragment, Bundle bundle, boolean isCanBack){
+		pushFragment(fragment, nextFragment, bundle, isCanBack, true);
 	}
 
 	public final void presentFragment(Fragment nextFragment, Bundle bundle, boolean isCanBack, boolean anim){

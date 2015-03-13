@@ -30,6 +30,6 @@ public class AllUploadContainer extends TabBasicFragment {
 	}
 	
 	private void initView(){
-		pushFragment(new AllUploadVC(), null, false, false);
+		pushFragment(this, new AllUploadVC(), null, false, false);
 	}
 }

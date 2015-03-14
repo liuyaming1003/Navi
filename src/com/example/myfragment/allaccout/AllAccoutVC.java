@@ -1,28 +1,37 @@
 package com.example.myfragment.allaccout;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.myfragment.MainActivity;
 import com.example.myfragment.R;
-import com.example.myfragment.ui.BasicFragment;
+import com.example.myfragment.allexams.ExamsDetail;
+import com.example.myfragment.fragment.FragmentViewController;
 
-public class AllAccoutVC extends BasicFragment {
-	private View rootView;
-	@SuppressLint("InflateParams") @Override
-	public View onCreateView(LayoutInflater inflater,
+public class AllAccoutVC extends FragmentViewController {
+	@Override
+	public View getRootView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		//View view = inflater.inflate(R.layout.vc_all_exams, container, false);
-		if(rootView==null){  
-			rootView=inflater.inflate(R.layout.vc_all_accout, null);  
-		}  
-		ViewGroup parent = (ViewGroup) rootView.getParent();  
-		if (parent != null) {  
-			parent.removeView(rootView);  
-		}   
-		return rootView;  
+		// TODO Auto-generated method stub
+		
+		View view = inflater.inflate(R.layout.vc_all_accout, container, false);
+		view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				push(AllAccoutVC.this, new ExamsDetail(), null, true);
+			}
+		});
+		return view;
+	}
+	
+	@Override
+	public void onHiddenChanged(boolean hidden) {
+		
+		System.out.println("hidden = " + hidden);
+		((MainActivity) getActivity()).hiddenTabHost(hidden);
+		super.onHiddenChanged(hidden);
 	}
 }

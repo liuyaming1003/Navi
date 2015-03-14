@@ -4,11 +4,14 @@ import com.example.myfragment.allaccout.AllAccoutContainer;
 import com.example.myfragment.allexams.AllExamsContainer;
 import com.example.myfragment.allshare.AllShareContainer;
 import com.example.myfragment.allupload.AllUploadContainer;
-import com.example.myfragment.ui.TabBasicFragment;
+import com.example.myfragment.fragment.TabBasicFragment;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.TabWidget;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.TabHost.OnTabChangeListener;
@@ -86,6 +89,21 @@ public class MainActivity extends BasicActivity implements OnTabChangeListener{
 			} else {
 				System.exit(0);// 否则退出程序
 			}
+		}
+	}
+	
+	public void hiddenTabHost(boolean hidden){
+		TabWidget tabs = (TabWidget) findViewById(android.R.id.tabs);
+		if(hidden == true){
+			Animation animation = AnimationUtils.loadAnimation(  
+	                this, R.anim.tabbar_dismiss);
+			tabs.setAnimation(animation);
+			tabs.setVisibility(View.GONE);
+		}else{
+			Animation animation = AnimationUtils.loadAnimation(  
+	                this, R.anim.tabbar_show);
+			tabs.setAnimation(animation);
+			tabs.setVisibility(View.VISIBLE);
 		}
 	}
 }

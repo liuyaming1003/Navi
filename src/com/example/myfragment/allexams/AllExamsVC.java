@@ -7,33 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.myfragment.MainActivity;
 import com.example.myfragment.R;
-import com.example.myfragment.ui.NavigationFragment;
+import com.example.myfragment.fragment.NavigationFragment;
 
 public class AllExamsVC extends NavigationFragment {
-	private View rootView;
-	@SuppressLint("InflateParams") @Override
-	public View onCreateView(LayoutInflater inflater,
-			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		//View view = inflater.inflate(R.layout.vc_all_exams, container, false);
-		if(rootView==null){  
-            rootView=inflater.inflate(R.layout.vc_all_exams, null);  
-        }  
-        ViewGroup parent = (ViewGroup) rootView.getParent();  
-        if (parent != null) {  
-            parent.removeView(rootView);  
-        }   
-        
-        rootView.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				push(AllExamsVC.this, new ExamsDetail(), null, true);
-			}
-		});
-        
-        return rootView;  
-	}
-
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
@@ -49,7 +27,21 @@ public class AllExamsVC extends NavigationFragment {
 	public void onHiddenChanged(boolean hidden) {
 		
 		System.out.println("hidden = " + hidden);
-		
+		((MainActivity) getActivity()).hiddenTabHost(hidden);
 		super.onHiddenChanged(hidden);
+	}
+
+	@SuppressLint("InflateParams") @Override
+	public View getRootView(LayoutInflater inflater,
+			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		
+		View view = inflater.inflate(R.layout.vc_all_exams, null);
+		view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				push(AllExamsVC.this, new ExamsDetail(), null, true);
+			}
+		});
+		return view;
 	}
 }

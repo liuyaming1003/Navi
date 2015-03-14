@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <set xmlns:android="http://schemas.android.com/apk/res/android" >
 
+    <!-- 因为TabHost在切换的时候后动画效果，故去掉Fragment pop的效果 -->
+    <!--
     <translate
         android:duration="300"
         android:fromXDelta="-20.0%p"
+        android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+        android:toXDelta="0.0" />
+    -->
+
+    <translate
+        android:duration="300"
+        android:fromXDelta="0.0%p"
         android:interpolator="@android:anim/accelerate_decelerate_interpolator"
         android:toXDelta="0.0" />
 

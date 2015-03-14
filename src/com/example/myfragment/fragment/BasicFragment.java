@@ -1,6 +1,4 @@
-package com.example.myfragment.ui;
-
-import com.example.myfragment.R;
+package com.example.myfragment.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,8 +6,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.AttributeSet;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -21,18 +17,20 @@ import android.view.ViewGroup;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.animation.Animation;
 
-public class TabBasicFragment extends Fragment {
+public class BasicFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 
-		System.out.println("--------------- "+ this + "onCreateView" + " **********");
+		System.out.println("********** "+ this + "onCreateView" + " **********");
 
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
 
 	@Override
 	public void onAttach(Activity activity) {
+		// TODO Auto-generated method stub
 
 		System.out.println("********** "+ this + "onAttach" + " **********");
 
@@ -143,7 +141,7 @@ public class TabBasicFragment extends Fragment {
 		// TODO Auto-generated method stub
 
 		System.out.println("********** "+ this + "onDetach" + " **********");
-
+		
 		super.onDetach();
 	}
 
@@ -151,7 +149,7 @@ public class TabBasicFragment extends Fragment {
 	public void onHiddenChanged(boolean hidden) {
 		// TODO Auto-generated method stub
 
-		System.out.println("********** "+ this + "onHiddenChanged" + " **********");
+		System.out.println("********** "+ this + "onHiddenChanged hidden " + hidden + " **********");
 
 		super.onHiddenChanged(hidden);
 	}
@@ -263,92 +261,5 @@ public class TabBasicFragment extends Fragment {
 		System.out.println("********** "+ this + "onViewStateRestored" + " **********");
 
 		super.onViewStateRestored(savedInstanceState);
-	}
-
-	public void pushFragment(Fragment fragment, Fragment nextFragment, Bundle bundle, boolean isCanBack, boolean anim){
-		FragmentManager fm = getChildFragmentManager();
-		FragmentTransaction ft =  fm.beginTransaction();
-		if(anim == true){
-			ft.setCustomAnimations(
-					R.anim.navigation_push_in,
-					R.anim.navigation_push_out,
-					R.anim.navigation_pop_in,
-					R.anim.navigation_pop_out);
-		}
-		if(fragment != this){
-			System.out.println("fragment is not this");
-			ft.hide(fragment);
-		}
-		if(bundle != null){
-			nextFragment.setArguments(bundle);
-		}
-		ft.add(R.id.tab_fragment, nextFragment);
-		if(isCanBack == true){
-			ft.addToBackStack(null);
-		}
-		ft.commit();
-	}
-
-	public final void pushFragment(Fragment fragment, Fragment nextFragment, Bundle bundle, boolean isCanBack){
-		pushFragment(fragment, nextFragment, bundle, isCanBack, true);
-	}
-
-	public final void presentFragment(Fragment nextFragment, Bundle bundle, boolean isCanBack, boolean anim){
-		FragmentManager fm = getChildFragmentManager();
-		FragmentTransaction ft =  fm.beginTransaction();
-		if(anim == true){
-			ft.setCustomAnimations(
-					R.anim.present_show_in,
-					R.anim.present_show_out,
-					R.anim.present_dismiss_in,
-					R.anim.present_dismiss_out);
-		}
-		if(bundle != null){
-			nextFragment.setArguments(bundle);
-		}
-		ft.add(R.id.tab_fragment, nextFragment);
-		if(isCanBack == true){
-			ft.addToBackStack(null);
-		}
-		ft.commit();
-	}
-
-	public final void presentFragment(Fragment nextFragment, Bundle bundle, boolean isCanBack){
-		presentFragment(nextFragment, bundle, isCanBack, true);
-	}
-
-	public final boolean popFragment(){
-		boolean isPop = false;
-		FragmentManager fm = getChildFragmentManager();
-		if (fm.getBackStackEntryCount() > 0) {
-			isPop = true;
-			fm.popBackStack();
-		}
-		return isPop;
-	}
-
-	public final void popToRootFragment(){
-		FragmentManager fm = getChildFragmentManager();
-		int count = fm.getBackStackEntryCount();
-		while (true) {
-			if(count-- == 0){
-				break;
-			}
-			fm.popBackStack();
-		}
-	}
-
-	public final void popToAtFragment(int index){
-		FragmentManager fm = getChildFragmentManager();
-		fm.popBackStack();
-		int count = fm.getBackStackEntryCount();
-		if(index >= 0 && index < count){
-			while(true){
-				if(count-- == index + 1){
-					break;
-				}
-				fm.popBackStack();
-			}
-		}
 	}
 }

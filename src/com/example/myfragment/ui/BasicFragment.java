@@ -23,7 +23,7 @@ public class BasicFragment extends Fragment {
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 
-		System.out.println("********** "+ this + "onCreateView" + " **********");
+		System.out.println("--------------- "+ this + "onCreateView" + " **********");
 
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}

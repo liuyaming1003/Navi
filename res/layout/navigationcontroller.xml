@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/navigation_relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@drawable/img_nav_gradient"
+        android:gravity="center_vertical" >
+
+        <LinearLayout
+            android:id="@+id/leftLLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="0dp"
+            android:background="#00000000"
+            android:minWidth="50dp"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:background="#545454"
+                android:drawableLeft="@drawable/navigation_back_bg"
+                android:padding="10dp"
+                android:drawablePadding="10dp"
+                android:visibility="gone"
+                android:text="测试" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/midLLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:background="#00000000"
+            android:minWidth="50dp"
+            android:orientation="horizontal" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/rightLLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="#00000000"
+            android:minWidth="50dp"
+            android:orientation="horizontal" >
+        </LinearLayout>
+    </RelativeLayout>
+
+</merge>

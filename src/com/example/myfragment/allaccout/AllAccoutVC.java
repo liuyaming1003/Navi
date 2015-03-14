@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import com.example.myfragment.MainActivity;
 import com.example.myfragment.R;
 import com.example.myfragment.allexams.ExamsDetail;
-import com.example.myfragment.fragment.FragmentViewController;
+import com.example.myfragment.fragment.NavigationFragment;
 
-public class AllAccoutVC extends FragmentViewController {
+public class AllAccoutVC extends NavigationFragment {
 	@Override
 	public View getRootView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

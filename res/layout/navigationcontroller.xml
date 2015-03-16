@@ -23,13 +23,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:background="#545454"
-                android:drawableLeft="@drawable/navigation_back_bg"
-                android:padding="10dp"
-                android:drawablePadding="10dp"
-                android:visibility="gone"
-                android:text="测试" />
+                android:background="@drawable/icn_nav_import" />
         </LinearLayout>
 
         <LinearLayout
@@ -37,7 +31,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            android:layout_centerVertical="true"
             android:background="#00000000"
             android:minWidth="50dp"
             android:orientation="horizontal" >

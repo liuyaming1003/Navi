@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:drawableTop="@drawable/tab_item_all_acount_drawable"
         android:focusable="true"
+        android:drawablePadding="5dp"
         android:textColor="@drawable/tabitem_txt_sel" />
 
 </LinearLayout>

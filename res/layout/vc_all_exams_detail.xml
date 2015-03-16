@@ -5,11 +5,18 @@
     android:background="#542556"
     android:orientation="vertical" >
 
-    <include layout="@layout/navigation" />
-    
-    <Button android:id="@+id/button"
+    <include layout="@layout/navigationcontroller" />
+
+    <Button
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="测试跳转"/>
+        android:text="测试跳转" />
+
+    <Button
+        android:id="@+id/hidden"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="隐藏" />
 
 </LinearLayout>

@@ -6,21 +6,22 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.myfragment.R;
-import com.example.myfragment.fragment.NavigationFragment;
+import com.example.myfragment.fragment.NavigationController;
 
-public class ExamsDetail extends NavigationFragment {
+public class ExamsDetail extends NavigationController {
+	boolean hidden = false;
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
 		if(savedInstanceState == null){
-			setLeftBg(R.drawable.navigation_back_bg);
-			setRightBg(R.drawable.navigation_home_bg);
-			setTitleText("详情");
+			setTitle("详情");
 		}
 	}
+	
 
 	@SuppressLint("InflateParams") 
 	@Override
@@ -28,10 +29,26 @@ public class ExamsDetail extends NavigationFragment {
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		
 		View view = inflater.inflate(R.layout.vc_all_exams_detail, null);
+		
 		view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				push(ExamsDetail.this, new ExamsDetail(), null, true);				
+				push(ExamsDetail.this, new ExamsDetail(), null, true);	
+				
+			}
+		});
+		
+		view.findViewById(R.id.hidden).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				hidden = !hidden;
+				setNavigationHidden(hidden, false);
+				if(hidden == true){
+					((Button)v).setText("显示");
+				}else{
+					((Button)v).setText("隐藏");
+				}
+				
 			}
 		});
 		

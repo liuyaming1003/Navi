@@ -3,23 +3,38 @@ package com.example.myfragment.allexams;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.myfragment.MainActivity;
+import com.example.myfragment.NavigationBarItem;
 import com.example.myfragment.R;
-import com.example.myfragment.fragment.NavigationFragment;
+import com.example.myfragment.fragment.NavigationController;
 
-public class AllExamsVC extends NavigationFragment {
+public class AllExamsVC extends NavigationController {
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
 		if(savedInstanceState == null){
-			setLeftBg(R.drawable.navigation_back_bg);
-			setRightBg(R.drawable.navigation_home_bg);
-			setTitleText("全部");
+			setTitle("全部");
+			NavigationBarItem item = new NavigationBarItem(getActivity());
+			item.setBtnImgText(R.drawable.icn_nav_import, "", Gravity.LEFT);
+			
+			setLeftBarItem(item);
+			
+			NavigationBarItem ritemSearch = new NavigationBarItem(getActivity());
+			ritemSearch.setBtnImgText(R.drawable.icn_nav_search, "", Gravity.RIGHT);
+			
+			final NavigationBarItem ritemMore = new NavigationBarItem(getActivity());
+			ritemMore.setBtnImgText(R.drawable.icn_nav_more, "", Gravity.RIGHT);
+			setRightBarItem(ritemSearch, ritemMore);
+			
+			final NavigationBarItem midItem = new NavigationBarItem(getActivity());
+			midItem.setBtnImgText(R.drawable.icn_nav_filter_expand, "全部", Gravity.RIGHT);
+			setTitleView(midItem);
 		}
 	}
 	

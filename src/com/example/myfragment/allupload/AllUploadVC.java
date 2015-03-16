@@ -3,24 +3,32 @@ package com.example.myfragment.allupload;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.myfragment.MainActivity;
+import com.example.myfragment.NavigationBarItem;
 import com.example.myfragment.R;
 import com.example.myfragment.allexams.ExamsDetail;
-import com.example.myfragment.fragment.NavigationFragment;
+import com.example.myfragment.fragment.NavigationController;
 
-public class AllUploadVC extends NavigationFragment {
+public class AllUploadVC extends NavigationController {
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
 		if(savedInstanceState == null){
-			setRightBg(R.drawable.navigation_home_bg);
-			setTitleText("全部上传");
+			setTitle("全部上传");
+			
+			NavigationBarItem ritemSearch = new NavigationBarItem(getActivity());
+			ritemSearch.setBtnImgText(R.drawable.icn_nav_search, "", Gravity.RIGHT);
+			
+			final NavigationBarItem ritemMore = new NavigationBarItem(getActivity());
+			ritemMore.setBtnImgText(R.drawable.icn_nav_more, "", Gravity.RIGHT);
+			setRightBarItem(ritemSearch, ritemMore);
 		}
 	}
 	

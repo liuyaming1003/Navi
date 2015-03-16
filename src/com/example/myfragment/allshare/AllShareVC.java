@@ -3,35 +3,38 @@ package com.example.myfragment.allshare;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.myfragment.MainActivity;
+import com.example.myfragment.NavigationBarItem;
 import com.example.myfragment.R;
 import com.example.myfragment.allexams.ExamsDetail;
-import com.example.myfragment.fragment.NavigationFragment;
+import com.example.myfragment.fragment.NavigationController;
 
-public class AllShareVC extends NavigationFragment {
+public class AllShareVC extends NavigationController {
 	@Override
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
 		if(savedInstanceState == null){
-			setRightBg(R.drawable.navigation_home_bg);
-			setTitleText("全部分享");
+			NavigationBarItem ritemSearch = new NavigationBarItem(getActivity());
+			ritemSearch.setBtnImgText(R.drawable.icn_nav_search, "", Gravity.RIGHT);
+			setRightBarItem(ritemSearch);
 		}
 	}
-	
+
 	@Override
 	public void onHiddenChanged(boolean hidden) {
-		
+
 		System.out.println("hidden = " + hidden);
 		((MainActivity) getActivity()).hiddenTabHost(hidden);
 		super.onHiddenChanged(hidden);
 	}
-	
+
 
 	@SuppressLint("InflateParams") 
 	@Override
@@ -46,7 +49,7 @@ public class AllShareVC extends NavigationFragment {
 				push(AllShareVC.this, new ExamsDetail(), null, true);
 			}
 		});
-		
+
 		return view;
 	}
 }

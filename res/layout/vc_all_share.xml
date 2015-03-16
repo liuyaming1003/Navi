@@ -5,7 +5,7 @@
     android:background="#e6ecf2"
     android:orientation="vertical" >
 
-    <include layout="@layout/navigation" />
+    <include layout="@layout/navigationcontroller" />
 
     <Button
         android:id="@+id/button"

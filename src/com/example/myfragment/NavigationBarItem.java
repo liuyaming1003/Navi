@@ -10,7 +10,7 @@ public class NavigationBarItem extends CustomButton{
 	public NavigationBarItem(Context context) {
 		super(context);
 		initItem(context);
-		setBackgroundColor(Color.RED);
+		//setBackgroundColor(Color.RED);
 	}
 
 	protected void initItem(Context context){

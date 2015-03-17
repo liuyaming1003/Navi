@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
@@ -57,7 +56,6 @@ public abstract class NavigationController extends FragmentViewController {
 			LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
 			params.weight = 1.0f;
 			titleView.setLayoutParams(params);
-			titleView.setBackgroundColor(Color.RED);
 			titleView.setGravity(Gravity.CENTER);
 			midLLayout.addView(titleView);
 
@@ -206,10 +204,12 @@ public abstract class NavigationController extends FragmentViewController {
 	 * @return       Fragment 
 	 * @throws       none
 	 */
+	@SuppressWarnings("unused")
 	private Fragment getLastValidFragment(List<Fragment> list){
 		Fragment fragment = null;
 		System.out.println("list = " + list);
 		List<Fragment> fragmentList = removeEmptyForList(list);
+		System.out.println("fragmentList = " + fragmentList);
 		if(fragmentList != null){
 			int size = fragmentList.size();
 			if(size >= 2){
@@ -229,12 +229,14 @@ public abstract class NavigationController extends FragmentViewController {
 	 * @throws       none
 	 */
 	private void addDefaultLeftBarItem(){
+		/*
 		FragmentManager fm = getParentFragment().getChildFragmentManager();
 		System.out.println("navigation Count = " + fm.getBackStackEntryCount());
 		List<Fragment> list = fm.getFragments();
 		if(list.size() > 1){
 			NavigationBarItem item = new NavigationBarItem(getActivity());
 			Fragment fragment = getLastValidFragment(list);
+			System.out.println("fragment = " + fragment);
 			String backText = "";
 			if(fragment != null && fragment instanceof NavigationController){
 				backText = ((NavigationController) fragment).getTitle();
@@ -248,7 +250,17 @@ public abstract class NavigationController extends FragmentViewController {
 					pop();					
 				}
 			});
-		}
+		}*/
+		NavigationBarItem item = new NavigationBarItem(getActivity());
+		item.setBtnImgText(R.drawable.navigation_back_bg, "", Gravity.LEFT);
+		setLeftBarItem(item);
+
+		item.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				pop();					
+			}
+		});
 	}
 
 	/**

@@ -1,5 +1,6 @@
 package com.example.myfragment.fragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.myfragment.NavigationBarItem;
@@ -179,6 +180,23 @@ public abstract class NavigationController extends FragmentViewController {
 		}
 	}
 
+	private List<Fragment> removeEmptyForList(List<Fragment> list) {  
+		List<Fragment> fragmentList = new ArrayList<Fragment>(); 
+
+		if(list==null||list.size()<=0)  
+			return null;  
+		//循环第一层  
+		for(int i=0;i<list.size();i++) {  
+			//进入每一个list  
+			Fragment fragment = (Fragment) list.get(i);  
+			if(fragment != null)  
+				fragmentList.add(fragment);  
+			System.out.println("no null count = " + fragmentList.size());  
+		}  
+
+		return fragmentList;  
+	} 
+
 	/**
 	 * 查找Fragment栈中有效的Fragment的上一个Fragment
 	 * @Title        NavigationController 
@@ -190,16 +208,13 @@ public abstract class NavigationController extends FragmentViewController {
 	 */
 	private Fragment getLastValidFragment(List<Fragment> list){
 		Fragment fragment = null;
-		int listSize = list.size();
-		for (int i = listSize; i > 0 ; i--) {
-			//取得最后一个Fragment
-			fragment = list.get(i - 1);
-			if(fragment != null){
-				//如果最后一个不为Null，就返回上一个Fragment
-				if(i >= 2){
-					fragment = list.get(i - 1 - 1);
-				}
-				break;
+		System.out.println("list = " + list);
+		List<Fragment> fragmentList = removeEmptyForList(list);
+		if(fragmentList != null){
+			int size = fragmentList.size();
+			if(size >= 2){
+				//返回倒数第二个Fragment
+				return fragmentList.get(size - 2);
 			}
 		}
 		return fragment;
@@ -215,6 +230,7 @@ public abstract class NavigationController extends FragmentViewController {
 	 */
 	private void addDefaultLeftBarItem(){
 		FragmentManager fm = getParentFragment().getChildFragmentManager();
+		System.out.println("navigation Count = " + fm.getBackStackEntryCount());
 		List<Fragment> list = fm.getFragments();
 		if(list.size() > 1){
 			NavigationBarItem item = new NavigationBarItem(getActivity());
